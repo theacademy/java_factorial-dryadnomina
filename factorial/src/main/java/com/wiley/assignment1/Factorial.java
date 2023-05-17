@@ -6,83 +6,98 @@ import java.util.Scanner;
 
 
 public class Factorial {
-	
-	 private Scanner scanner;
-	 private PrintStream printStream;
-	 private int num;
-	 
 
-	 public Factorial(InputStream inputStream, PrintStream printStream) {
-	      this.scanner = new Scanner(inputStream);
-	      this.printStream = printStream;
-	 }
-	 
-	 public int isInputNumberValid()  {
-		 
+    private Scanner scanner;
+    private PrintStream printStream;
+    private int num;
+
+
+    public Factorial(InputStream inputStream, PrintStream printStream) {
+        this.scanner = new Scanner(inputStream);
+        this.printStream = printStream;
+    }
+
+    public int isInputNumberValid() {
+
 		/*
-		- Update this method to accept a number from the user and store the value in an instance variable `num`. 
+		- Update this method to accept a number from the user and store the value in an instance variable `num`.
 			- Use an instance variable `scanner` to accept the input from the user.
-		
+
 		- If the input value is valid, return the number input by the user (NOT the factorial of the number).
-		
+
 		- In case of invalid input:
 			- Print the following message to the console: "Invalid entry. Please enter an integer between 1 and 10, inclusive."
 			    - Use `this.printStream.print()` and NOT `System.out.println()` to print to the console.
 			- Return -1
-			
+
 		- All code should be inside the placeholders below.
 		*/
 
-		//YOUR CODE STARTS HERE
+        //YOUR CODE STARTS HERE
 
-		return -1;
+//        Scanner userInput = new Scanner(System.in);
+        String input = this.scanner.nextLine();
 
-		//YOUR CODE ENDS HERE
-		 
-			
-	 }
-	
-	 
-	 private void calculateFactorial(int num) {
-		
+
+        try {
+            int result = Integer.parseInt(input);
+            if (result < 0 || result > 10) {
+                this.printStream.print("Please Enter valid Input as number between 1 and 10 only, both inclusive");
+                return -1;
+            }
+            return result;
+        } catch (NumberFormatException e) {
+            this.printStream.print("Please Enter valid Input as number between 1 and 10 only, both inclusive");
+            return -1;
+        }
+
+
+        //YOUR CODE ENDS HERE
+
+
+    }
+
+
+    private void calculateFactorial(int num) {
+
 		  /*
 		  Use this method to calculate the factorial of the number input by the user.
-		  
+
 		  - All code should be inside the placeholders below.
 		*/
-		 
-		int result = 1;
-		//YOUR CODE STARTS HERE
 
- 
+        int result = 1;
+        //YOUR CODE STARTS HERE
 
-		//YOUR CODE ENDS HERE
-		this.printStream.print("The Factorial is: " + result);		
-		
-	 }
-	 
-	 public void calculateFactorial() {
+        for (int i = 0; i < num; i++) {
+            result *= num - i;
+        }
+        //YOUR CODE ENDS HERE
+        this.printStream.print("The Factorial is: " + result);
+
+    }
+
+    public void calculateFactorial() {
 		 /*
 		 Do not change this method.
 		 */
-		 	
-		 int input = this.isInputNumberValid();
-		 if(input != -1)
-		 {
-			 calculateFactorial(input);
-		 }
-		 
-	 }
-	
 
-	 public static void main(String[] args) { 
+        int input = this.isInputNumberValid();
+        if (input != -1) {
+            calculateFactorial(input);
+        }
+
+    }
+
+
+    public static void main(String[] args) {
 		/*
 		 Do not change this method.
 		 */
-		Factorial fact = new Factorial(System.in,System.out);
-		System.out.println("Enter an integer between 1 and 10, inclusive");
-		fact.calculateFactorial();	
-	 }
+        Factorial fact = new Factorial(System.in, System.out);
+        System.out.println("Enter an integer between 1 and 10, inclusive");
+        fact.calculateFactorial();
+    }
 
-	
+
 }
